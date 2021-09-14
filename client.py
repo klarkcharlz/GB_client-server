@@ -1,11 +1,15 @@
 from socket import socket, AF_INET, SOCK_STREAM
 import argparse
 from time import time
-from json import dumps
+from json import dumps, loads
 
-timeout_ = 10
 parser = argparse.ArgumentParser(description='JSON instant messaging client.')
-parser.add_argument('addr', type=str, help='Server IP')
+parser.add_argument(
+    '-addr',
+    type=str,
+    default="localhost",
+    help='Server IP (default: localhost)'
+)
 parser.add_argument(
     '-port',
     type=int,
@@ -14,14 +18,48 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-client = socket(AF_INET, SOCK_STREAM)  # обьект клиент
-# AF_INET -указывает, что создаваемый сокет будет сетевым
-# SOCK_STREAM -указывает на то, что сокет работает с TCP-пакетами
-client.settimeout(timeout_)  # таймаут подключения
+
+class CustomClient:
+    """Кастомный клиент"""
+
+    def __init__(self, family: int, type_: int, timeout_: int) -> None:
+        self.client = socket(family, type_)
+        self.client.settimeout(timeout_)
+
+    def connect(self, address: str, port: int) -> None:
+        """Подключение к серверу"""
+        self.client.connect((address, port))  # подключение
+
+    def disconnect(self) -> None:
+        """отключение от сервера"""
+        self.client.close()
+
+    def __receive_msg(self) -> bytes:
+        """Прием ответного сообщения"""
+        return self.client.recv(1000000)
+
+    @staticmethod
+    def __validate_response(data):
+        """Валидация ответного сообщения от сервера"""
+        data = loads(data.decode('utf-8'))
+        try:
+            assert len(data) in [1, 2], "Не валидное количество полей"
+            assert "response" in data, "Отсутствует поле response"
+            assert isinstance(data["response"], int), "Поле response не числового типа"
+            assert "alert" in data or "error" in data, "Присутствуют не валидные поля"
+        except AssertionError as err:
+            return f"Не валидное сообщение от сервера, {str(err)}: {data}"
+        else:
+            return f"Валидное сообщение от сервера: {data}"
+
+    def send_message(self, mess: dict) -> str:
+        """Отправка сообщения серверу"""
+        self.client.send(dumps(mess).encode('utf-8'))
+        response_data = self.__receive_msg()
+        return self.__validate_response(response_data)
+
 
 if __name__ == "__main__":
-    client.connect((args.addr, args.port))  # подключение
-
     msg = {
         "action": "presence",
         "time": int(time()),
@@ -32,9 +70,7 @@ if __name__ == "__main__":
         }
     }
 
-    client.send(dumps(msg).encode('utf-8'))  # отправка сообщения по сети через сокет на сервер
-    data = client.recv(1000000)  # прием ответного сообщения
-
-    print('Сообщение от сервера: ', data.decode('utf-8'), ', длиной ', len(data), ' байт')
-
-    client.close()  # закрываем соединение
+    my_client = CustomClient(AF_INET, SOCK_STREAM, 10)
+    my_client.connect(args.addr, args.port)
+    print(my_client.send_message(msg))
+    my_client.disconnect()
