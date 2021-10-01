@@ -50,7 +50,7 @@ class CustomClient:
         except AssertionError as err:
             return f"Не валидное сообщение от сервера, {str(err)}: {data}"
         else:
-            return f"Валидное сообщение от сервера: {data}"
+            return str(data)
 
     def send_message(self, mess: dict) -> str:
         """Отправка сообщения серверу"""
