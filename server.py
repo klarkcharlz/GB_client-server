@@ -4,6 +4,7 @@ from datetime import datetime
 import argparse
 from json import dumps, loads
 
+from log.server_log_config import server_log
 
 parser = argparse.ArgumentParser(description='JSON instant messaging client.')
 parser.add_argument(
@@ -38,6 +39,7 @@ class CustomServer:
                 client, address = self.server.accept()  # ловим подключение
             except TimeoutError:
                 print(f"Клиентов не обнаружено")
+                server_log.info("TEST")
             else:
                 data = loads(client.recv(1000000).decode('utf-8'))  # принимаем данные
 
