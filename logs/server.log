@@ -1,0 +1,10 @@
+2021-10-17 23:22:14,811 WARNING    server 2021-10-17 23:22:14.811666: Запуск сервера
+2021-10-17 23:22:17,681 INFO       server Установлено соединение с клиентом: <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 63507)>/('127.0.0.1', 63507).
+2021-10-17 23:22:17,681 INFO       server Сообщение: {'action': 'presence', 'time': 1634502137, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}, было отправлено клиентом: ('127.0.0.1', 63507)
+2021-10-17 23:22:17,682 INFO       server Клиенту <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 7777), raddr=('127.0.0.1', 63507)>/('127.0.0.1', 63507) отправлено ответное сообщение: 'b'{"alert": "OK", "response": 200}''.
+2021-10-17 23:22:17,682 INFO       server Соединение с клиентом <socket.socket [closed] fd=-1, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0>/('127.0.0.1', 63507) закрыто'.
+2021-10-17 23:22:27,683 INFO       server 2021-10-17 23:22:27.683353: Клиентов не обнаружено
+2021-10-17 23:22:37,688 INFO       server 2021-10-17 23:22:37.688588: Клиентов не обнаружено
+2021-10-17 23:22:47,695 INFO       server 2021-10-17 23:22:47.694780: Клиентов не обнаружено
+2021-10-17 23:22:57,701 INFO       server 2021-10-17 23:22:57.700750: Клиентов не обнаружено
+2021-10-17 23:23:07,702 INFO       server 2021-10-17 23:23:07.702267: Клиентов не обнаружено

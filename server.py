@@ -33,17 +33,17 @@ class CustomServer:
 
     def run(self) -> None:
         """Запуск сервера"""
-        print(f"{datetime.now()}: Запуск сервера")
+        server_log.warning(f"{datetime.now()}: Запуск сервера")
         while True:
             try:
                 client, address = self.server.accept()  # ловим подключение
+                server_log.info(f"Установлено соединение с клиентом: {client}/{address}.")
             except TimeoutError:
-                print(f"Клиентов не обнаружено")
-                server_log.info("TEST")
+                server_log.info(f"{datetime.now()}: Клиентов не обнаружено")
             else:
                 data = loads(client.recv(1000000).decode('utf-8'))  # принимаем данные
 
-                print(f'Сообщение: {data}, было отправлено клиентом: {address}')
+                server_log.info(f'Сообщение: {data}, было отправлено клиентом: {address}')
 
                 msg = {}
                 try:
@@ -54,14 +54,18 @@ class CustomServer:
                     assert "time" in data, "Отсутствует поле time."
                     assert isinstance(data["time"], int), "Поле time не валидного значения"
                 except AssertionError as err:
+                    server_log.exception(err)
                     msg["error"] = str(err)
                     msg["response"] = 400
                 else:
                     msg["alert"] = "OK"
                     msg["response"] = 200
 
-                client.send(dumps(msg).encode('utf-8'))  # отправляем данные обратно клиенту
+                response_msg = dumps(msg).encode('utf-8')
+                client.send(response_msg)  # отправляем данные обратно клиенту
+                server_log.info(f"Клиенту {client}/{address} отправлено ответное сообщение: '{response_msg}'.")
                 client.close()  # закрываем подключение
+                server_log.info(f"Соединение с клиентом {client}/{address} закрыто'.")
 
 
 if __name__ == "__main__":
