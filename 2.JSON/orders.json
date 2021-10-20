@@ -2,24 +2,24 @@
     "orders": [
         {
             "item": "PC",
-            "quantity": 2,
-            "price": 3200.2,
-            "buyer": "Nik Nikolson",
-            "date": "2021-09-05T01:18:45.437909"
+            "quantity": 3,
+            "price": 1000,
+            "buyer": "Nik Nik",
+            "date": "2021-10-20T13:57:55.072338"
         },
         {
-            "item": "PC",
-            "quantity": 2,
-            "price": 3200.2,
-            "buyer": "Nik Nikolson",
-            "date": "2021-09-05T01:18:50.183477"
+            "item": "SSD",
+            "quantity": 5,
+            "price": 2000,
+            "buyer": "Mike Mik",
+            "date": "2021-10-20T13:57:55.072345"
         },
         {
-            "item": "PC",
-            "quantity": 2,
-            "price": 3200.2,
-            "buyer": "Nik Nikolson",
-            "date": "2021-09-05T01:18:50.878937"
+            "item": "HHD",
+            "quantity": 22,
+            "price": 10000,
+            "buyer": "Max Maxi",
+            "date": "2021-10-20T13:57:55.072346"
         }
     ]
 }

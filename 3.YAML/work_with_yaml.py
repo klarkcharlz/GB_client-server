@@ -1,6 +1,6 @@
 import yaml
 
-test_data = {
+TEST_DATA = {
     "list": [1, 2, 3],
     "int": 4,
     "dict": {
@@ -9,14 +9,16 @@ test_data = {
 }
 
 with open('data.yaml', 'w') as f:
-    yaml.dump(test_data, f, default_flow_style=False, allow_unicode=True)
+    # запись в файл
+    yaml.dump(TEST_DATA, f, default_flow_style=False, allow_unicode=True)
 
 with open('data.yaml') as f:
-    print(f.read())
+    # чтение
+    f_n_content = yaml.safe_load(f)
+    print(f_n_content)
+    print(f_n_content == TEST_DATA)  # данные совпадают, но ключи в обратном порядке
 
 """
 Данные совпадают, 
-но благодаря "default_flow_style=False" данные записались в характерном для yaml стиле.
-
 Почему запись в файл произвелась по ключам в обратном порядке?
 """
