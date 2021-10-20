@@ -1,0 +1,25 @@
+{
+    "orders": [
+        {
+            "item": "PC",
+            "quantity": 3,
+            "price": 1000,
+            "buyer": "Nik Nik",
+            "date": "2021-10-20T13:57:55.072338"
+        },
+        {
+            "item": "SSD",
+            "quantity": 5,
+            "price": 2000,
+            "buyer": "Mike Mik",
+            "date": "2021-10-20T13:57:55.072345"
+        },
+        {
+            "item": "HHD",
+            "quantity": 22,
+            "price": 10000,
+            "buyer": "Max Maxi",
+            "date": "2021-10-20T13:57:55.072346"
+        }
+    ]
+}
