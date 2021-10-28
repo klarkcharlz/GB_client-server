@@ -41,16 +41,24 @@ class CustomClient:
     @staticmethod
     def __validate_response(data):
         """Валидация ответного сообщения от сервера"""
-        data = loads(data.decode('utf-8'))
         try:
-            assert len(data) in [1, 2], "Не валидное количество полей"
-            assert "response" in data, "Отсутствует поле response"
-            assert isinstance(data["response"], int), "Поле response не числового типа"
-            assert "alert" in data or "error" in data, "Присутствуют не валидные поля"
-        except AssertionError as err:
-            return f"Не валидное сообщение от сервера, {str(err)}: {data}"
+            data = loads(data.decode('utf-8'))
+        except Exception as err:
+            print(f"{type(err)}\n{err}")
+            return "Message not JSON format."
         else:
-            return str(data)
+            if isinstance(data, dict):
+                try:
+                    assert len(data) in [1, 2], "Не валидное количество полей"
+                    assert "response" in data, "Отсутствует поле response"
+                    assert isinstance(data["response"], int), "Поле response не числового типа"
+                    assert "alert" in data or "error" in data, "Присутствуют не валидные поля"
+                except AssertionError as err:
+                    return f"Не валидное сообщение от сервера, {str(err)}: {data}"
+                else:
+                    return str(data)
+            else:
+                return "Message not JSON format."
 
     def send_message(self, mess: dict) -> str:
         """Отправка сообщения серверу"""
