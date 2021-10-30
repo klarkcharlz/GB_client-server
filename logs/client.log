@@ -7,3 +7,23 @@ ConnectionRefusedError: [Errno 61] Connection refused
 2021-10-17 23:22:17,680  INFO        client  Установлено соединение с сервером.
 2021-10-17 23:22:17,681  INFO        client  Отправлено сообщение: '{'action': 'presence', 'time': 1634502137, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
 2021-10-17 23:22:17,682  INFO        client  Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-10-30 19:05:51,713    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-10-30 19:05:51,714    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1635609951, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-10-30 19:05:51,716    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-10-30 19:05:51,716    INFO        client      Отключение от сервера.
+2021-10-30 19:20:27,962    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-10-30 19:20:27,963    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1635610827, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-10-30 19:20:27,965    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-10-30 19:20:27,965    INFO        client      Отключение от сервера.
+2021-10-30 19:20:30,230    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-10-30 19:20:30,231    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1635610830, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-10-30 19:20:30,231    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-10-30 19:20:30,231    INFO        client      Отключение от сервера.
+2021-10-30 19:23:43,190    ERROR       client      Неудалось установить соединение с вервером localhost:7777
+2021-10-30 19:23:43,190    ERROR       client      [Errno 61] Connection refused
+Traceback (most recent call last):
+  File "client.py", line 35, in connect
+    self.client.connect((address, port))  # подключение
+ConnectionRefusedError: [Errno 61] Connection refused
+2021-10-30 19:23:43,191    WARNING     client      Отправка сообщения невозможна, соединение с сервером небыло установленно.
+2021-10-30 19:23:43,191    INFO        client      Отключение от сервера.

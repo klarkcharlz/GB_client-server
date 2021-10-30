@@ -1,10 +1,9 @@
 from socket import socket, AF_INET, SOCK_STREAM
 from socket import timeout as TimeoutError
-from datetime import datetime
 import argparse
 from json import dumps, loads
 
-from log.server_log_config import server_log
+from log_conf.server_log_config import server_log
 
 parser = argparse.ArgumentParser(description='JSON instant messaging client.')
 parser.add_argument(
@@ -33,39 +32,51 @@ class CustomServer:
 
     def run(self) -> None:
         """Запуск сервера"""
-        server_log.warning(f"{datetime.now()}: Запуск сервера")
+        server_log.warning("Запуск сервера")
         while True:
+            msg = {}
             try:
                 client, address = self.server.accept()  # ловим подключение
-                server_log.info(f"Установлено соединение с клиентом: {client}/{address}.")
+                server_log.info(f"Установлено соединение с клиентом: {address}.")
             except TimeoutError:
-                server_log.info(f"{datetime.now()}: Клиентов не обнаружено")
+                server_log.info("Клиентов не обнаружено")
             else:
-                data = loads(client.recv(1000000).decode('utf-8'))  # принимаем данные
-
-                server_log.info(f'Сообщение: {data}, было отправлено клиентом: {address}')
-
-                msg = {}
                 try:
-                    assert "action" in data, "Отсутствует поле action."
-                    assert data["action"] in ["presence", "prоbe", "msg", "quit", "authenticate", "join", "leave"],\
-                        "Поле action содержит не допустимое значение."
-                    assert len(data["action"]) < 16, "Поле action превышает максимальное значение в 16 символов"
-                    assert "time" in data, "Отсутствует поле time."
-                    assert isinstance(data["time"], int), "Поле time не валидного значения"
-                except AssertionError as err:
+                    data = loads(client.recv(1000000).decode('utf-8'))  # принимаем данные
+                except Exception as err:
+                    server_log.error("Принято сообщение неверного формата.")
                     server_log.exception(err)
-                    msg["error"] = str(err)
+                    msg["error"] = "Message not JSON format."
                     msg["response"] = 400
                 else:
-                    msg["alert"] = "OK"
-                    msg["response"] = 200
+                    server_log.info(f'Сообщение: {data}, было отправлено клиентом: {address}')
+
+                    if isinstance(data, dict):
+                        try:
+                            assert "action" in data, "Отсутствует поле action."
+                            assert data["action"] in ["presence", "prоbe", "msg", "quit", "authenticate", "join", "leave"],\
+                                "Поле action содержит не допустимое значение."
+                            assert len(data["action"]) < 16, "Поле action превышает максимальное значение в 16 символов"
+                            assert "time" in data, "Отсутствует поле time."
+                            assert isinstance(data["time"], int), "Поле time не валидного значения"
+                        except AssertionError as err:
+                            server_log.error("Принят не валидный JSON.")
+                            server_log.exception(err)
+                            msg["error"] = str(err)
+                            msg["response"] = 400
+                        else:
+                            msg["alert"] = "OK"
+                            msg["response"] = 200
+                    else:
+                        server_log.error(f"Принято сообщение неверного формата: {data}.")
+                        msg["error"] = "Message not JSON format."
+                        msg["response"] = 400
 
                 response_msg = dumps(msg).encode('utf-8')
                 client.send(response_msg)  # отправляем данные обратно клиенту
-                server_log.info(f"Клиенту {client}/{address} отправлено ответное сообщение: '{response_msg}'.")
+                server_log.info(f"Клиенту {address} отправлено ответное сообщение: '{response_msg}'.")
                 client.close()  # закрываем подключение
-                server_log.info(f"Соединение с клиентом {client}/{address} закрыто'.")
+                server_log.info(f"Соединение с клиентом {address} закрыто'.")
 
 
 if __name__ == "__main__":
