@@ -2,7 +2,9 @@ from socket import socket, AF_INET, SOCK_STREAM
 import argparse
 from time import time
 from json import dumps, loads
+
 from log_conf.client_log_config import client_log
+from decos import Log
 
 
 parser = argparse.ArgumentParser(description='JSON instant messaging client.')
@@ -29,6 +31,7 @@ class CustomClient:
         self.client.settimeout(timeout_)
         self.con = False
 
+    @Log(client_log)
     def connect(self, address: str, port: int) -> None:
         """Подключение к серверу"""
         try:
@@ -40,16 +43,19 @@ class CustomClient:
             self.con = True
             client_log.info(f"Установлено соединение с сервером {address}:{port}.")
 
+    @Log(client_log)
     def disconnect(self) -> None:
         """отключение от сервера"""
         client_log.info("Отключение от сервера.")
         self.client.close()
 
+    @Log(client_log)
     def __receive_msg(self) -> bytes:
         """Прием ответного сообщения"""
         return self.client.recv(1000000)
 
     @staticmethod
+    @Log(client_log)
     def __validate_response(data):
         """Валидация ответного сообщения от сервера"""
         try:
@@ -75,6 +81,7 @@ class CustomClient:
                 client_log.error(f"Принятое сообщение имеет не верный формат: {data}")
                 return "Message not JSON format."
 
+    @Log(client_log)
     def send_message(self, mess: dict) -> str:
         """Отправка сообщения серверу"""
         if self.con:

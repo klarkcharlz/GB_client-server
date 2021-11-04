@@ -4,6 +4,8 @@ import argparse
 from json import dumps, loads
 
 from log_conf.server_log_config import server_log
+from decos import Log
+
 
 parser = argparse.ArgumentParser(description='JSON instant messaging client.')
 parser.add_argument(
@@ -30,6 +32,7 @@ class CustomServer:
         self.server.bind((addr, port))
         self.server.listen(max_clients)
 
+    @Log(server_log)
     def run(self) -> None:
         """Запуск сервера"""
         server_log.warning("Запуск сервера")
