@@ -95,20 +95,23 @@ class CustomClient:
             client_log.warning(f"Отправка сообщения невозможна, соединение с сервером небыло установленно.")
             return "Нет активного соединения."
 
+    @Log(client_log)
+    def run(self):
+        msg = {
+            "action": "msg",
+        }
+
+        self.connect(args.addr, args.port)
+        while True:
+            text = input("Введите текст для отправки. EXIT - для выхода.\n")
+            if text == "EXIT":
+                self.disconnect()
+                break
+            msg["message"] = text
+            msg["time"] = int(time())
+            self.send_message(msg)
+
 
 if __name__ == "__main__":
-    msg = {
-        "action": "presence",
-        "time": int(time()),
-        "type": "status",
-        "user": {
-            "account_name": "Klark Charlz",
-            "status": "Online"
-        }
-    }
-
     my_client = CustomClient(AF_INET, SOCK_STREAM, 10)
-    my_client.connect(args.addr, args.port)
-    # print(my_client.send_message(msg))
-    my_client.send_message(msg)
-    my_client.disconnect()
+    my_client.run()

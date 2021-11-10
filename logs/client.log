@@ -213,3 +213,36 @@ ConnectionRefusedError: [Errno 61] Connection refused
 2021-11-04 23:28:09,625    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fc9604b1eb0>, {'action': 'presence', 'time': 1636057689, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}.
 2021-11-04 23:28:09,625    INFO        client      Отключение от сервера.
 2021-11-04 23:28:09,625    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fc9604b1eb0>,), {}) = None.
+2021-11-08 20:38:08,628    INFO        client      Функция connect была вызвана из функции run
+2021-11-08 20:38:08,634    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-08 20:38:08,634    INFO        client      Log connect((<__main__.CustomClient object at 0x7f99c04aff40>, 'localhost', 7777), {}) = None.
+2021-11-08 20:38:11,976    INFO        client      Функция send_message была вызвана из функции run
+2021-11-08 20:38:11,980    INFO        client      Отправлено сообщение: '{'action': 'msg', 'message': 'adsadas', 'time': 1636393091.974446}'.
+2021-11-08 20:38:11,981    INFO        client      Функция __receive_msg была вызвана из функции send_message
+2021-11-08 20:38:11,983    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f99c04aff40>,), {}) = b'{"error": "\\u041f\\u043e\\u043b\\u0435 time \\u043d\\u0435 \\u0432\\u0430\\u043b\\u0438\\u0434\\u043d\\u043e\\u0433\\u043e \\u0437\\u043d\\u0430\\u0447\\u0435\\u043d\\u0438\\u044f", "response": 400}'.
+2021-11-08 20:38:11,985    INFO        client      Функция __validate_response была вызвана из функции send_message
+2021-11-08 20:38:11,985    INFO        client      Log __validate_response((b'{"error": "\\u041f\\u043e\\u043b\\u0435 time \\u043d\\u0435 \\u0432\\u0430\\u043b\\u0438\\u0434\\u043d\\u043e\\u0433\\u043e \\u0437\\u043d\\u0430\\u0447\\u0435\\u043d\\u0438\\u044f", "response": 400}',), {}) = {'error': 'Поле time не валидного значения', 'response': 400}.
+2021-11-08 20:38:11,986    INFO        client      Получено сообщение: '{'error': 'Поле time не валидного значения', 'response': 400}'.
+2021-11-08 20:38:11,986    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f99c04aff40>, {'action': 'msg', 'message': 'adsadas', 'time': 1636393091.974446}), {}) = {'error': 'Поле time не валидного значения', 'response': 400}.
+2021-11-08 20:39:19,933    INFO        client      Функция connect была вызвана из функции run
+2021-11-08 20:39:19,935    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-08 20:39:19,935    INFO        client      Log connect((<__main__.CustomClient object at 0x7fb3784b0f40>, 'localhost', 7777), {}) = None.
+2021-11-08 20:39:21,257    INFO        client      Функция send_message была вызвана из функции run
+2021-11-08 20:39:21,258    INFO        client      Отправлено сообщение: '{'action': 'msg', 'message': 'sadsad', 'time': 1636393161}'.
+2021-11-08 20:39:21,259    INFO        client      Функция __receive_msg была вызвана из функции send_message
+2021-11-08 20:39:21,260    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fb3784b0f40>,), {}) = b'{"alert": "OK", "response": 200}'.
+2021-11-08 20:39:21,261    INFO        client      Функция __validate_response была вызвана из функции send_message
+2021-11-08 20:39:21,261    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-08 20:39:21,261    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-08 20:39:21,261    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fb3784b0f40>, {'action': 'msg', 'message': 'sadsad', 'time': 1636393161}), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-08 20:39:40,342    INFO        client      Функция disconnect была вызвана из функции run
+2021-11-08 20:39:40,343    INFO        client      Отключение от сервера.
+2021-11-08 20:39:40,344    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fb3784b0f40>,), {}) = None.
+2021-11-08 20:39:40,344    INFO        client      Log run((<__main__.CustomClient object at 0x7fb3784b0f40>,), {}) = None.
+2021-11-08 20:40:21,164    INFO        client      Функция connect была вызвана из функции run
+2021-11-08 20:40:21,167    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-08 20:40:21,167    INFO        client      Log connect((<__main__.CustomClient object at 0x7fe96846ff40>, 'localhost', 7777), {}) = None.
+2021-11-08 20:40:24,593    INFO        client      Функция disconnect была вызвана из функции run
+2021-11-08 20:40:24,594    INFO        client      Отключение от сервера.
+2021-11-08 20:40:24,595    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fe96846ff40>,), {}) = None.
+2021-11-08 20:40:24,595    INFO        client      Log run((<__main__.CustomClient object at 0x7fe96846ff40>,), {}) = None.
