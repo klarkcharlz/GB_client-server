@@ -17,7 +17,7 @@ parser.add_argument(
 parser.add_argument(
     '-port',
     type=int,
-    default=7777,
+    default=7775,
     help='Server port (default: 7777)'
 )
 args = parser.parse_args()
@@ -26,10 +26,12 @@ args = parser.parse_args()
 class CustomClient:
     """Кастомный клиент"""
 
-    def __init__(self, family: int, type_: int, timeout_: int) -> None:
+    def __init__(self, family: int, type_: int, timeout_=None) -> None:
         self.client = socket(family, type_)
-        self.client.settimeout(timeout_)
+        if timeout_:
+            self.client.settimeout(timeout_)
         self.con = False
+        self.type = 1
 
     @Log(client_log)
     def connect(self, address: str, port: int) -> None:
@@ -67,7 +69,7 @@ class CustomClient:
         else:
             if isinstance(data, dict):
                 try:
-                    assert len(data) in [1, 2], "Не валидное количество полей"
+                    assert len(data) in [1, 2, 3], "Не валидное количество полей"
                     assert "response" in data, "Отсутствует поле response"
                     assert isinstance(data["response"], int), "Поле response не числового типа"
                     assert "alert" in data or "error" in data, "Присутствуют не валидные поля"
@@ -87,10 +89,11 @@ class CustomClient:
         if self.con:
             self.client.send(dumps(mess).encode('utf-8'))
             client_log.info(f"Отправлено сообщение: '{mess}'.")
-            response_data = self.__receive_msg()
-            response_msg = self.__validate_response(response_data)
-            client_log.info(f"Получено сообщение: '{response_msg}'.")
-            return response_msg
+            if self.type != 1:  # отправителю ненужно ждать ответного сообщения
+                response_data = self.__receive_msg()
+                response_msg = self.__validate_response(response_data)
+                client_log.info(f"Получено сообщение: '{response_msg}'.")
+                return response_msg
         else:
             client_log.warning(f"Отправка сообщения невозможна, соединение с сервером небыло установленно.")
             return "Нет активного соединения."
@@ -101,17 +104,32 @@ class CustomClient:
             "action": "msg",
         }
 
-        self.connect(args.addr, args.port)
         while True:
-            text = input("Введите текст для отправки. EXIT - для выхода.\n")
-            if text == "EXIT":
-                self.disconnect()
-                break
-            msg["message"] = text
-            msg["time"] = int(time())
-            self.send_message(msg)
+            try:
+                type_ = int(input("Выберите тип:\n1.Отправитель\n2.Получатель\n"))
+            except Exception as err:
+                print("Выберите 1 или 2.")
+            else:
+                self.type = type_
+                self.connect(args.addr, args.port)
+                if type_ == 1:  # для отправителя
+                    msg["type"] = type_  # что бы сервер понимал кому слать сообщения, а кому нет
+                    while True:
+                        text = input("Введите текст для отправки. EXIT - для выхода.\n")
+                        if text == "EXIT":
+                            self.disconnect()
+                            break
+                        msg["message"] = text
+                        msg["time"] = int(time())
+                        self.send_message(msg)
+                else:  # для слушателя
+                    client_log.info("Ждем сообщений")
+                    while True:
+                        response_data = self.__receive_msg()
+                        response_msg = self.__validate_response(response_data)
+                        client_log.info(f"Получено сообщение: '{response_msg}'.")
 
 
 if __name__ == "__main__":
-    my_client = CustomClient(AF_INET, SOCK_STREAM, 10)
+    my_client = CustomClient(AF_INET, SOCK_STREAM)
     my_client.run()
