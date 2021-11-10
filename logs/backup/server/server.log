@@ -1,0 +1,44 @@
+Запуск сервера
+Запуск сервера
+Установлено соединение с клиентом: ('127.0.0.1', 61888).
+Сообщение: {'action': 'msg', 'message': 'adsadas', 'time': 1636393091.974446}, было отправлено клиентом: ('127.0.0.1', 61888)
+Принят не валидный JSON.
+Поле time не валидного значения
+Traceback (most recent call last):
+  File "server.py", line 64, in run
+    assert isinstance(data["time"], int), "Поле time не валидного значения"
+AssertionError: Поле time не валидного значения
+Клиенту ('127.0.0.1', 61888) отправлено ответное сообщение: 'b'{"error": "\\u041f\\u043e\\u043b\\u0435 time \\u043d\\u0435 \\u0432\\u0430\\u043b\\u0438\\u0434\\u043d\\u043e\\u0433\\u043e \\u0437\\u043d\\u0430\\u0447\\u0435\\u043d\\u0438\\u044f", "response": 400}''.
+Соединение с клиентом ('127.0.0.1', 61888) закрыто'.
+Клиентов не обнаружено
+Клиентов не обнаружено
+Клиентов не обнаружено
+Клиентов не обнаружено
+Клиентов не обнаружено
+Клиентов не обнаружено
+Установлено соединение с клиентом: ('127.0.0.1', 61893).
+Сообщение: {'action': 'msg', 'message': 'sadsad', 'time': 1636393161}, было отправлено клиентом: ('127.0.0.1', 61893)
+Клиенту ('127.0.0.1', 61893) отправлено ответное сообщение: 'b'{"alert": "OK", "response": 200}''.
+Соединение с клиентом ('127.0.0.1', 61893) закрыто'.
+Клиентов не обнаружено
+Клиентов не обнаружено
+Клиентов не обнаружено
+Клиентов не обнаружено
+Клиентов не обнаружено
+Установлено соединение с клиентом: ('127.0.0.1', 61900).
+Принято сообщение неверного формата.
+Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "server.py", line 48, in run
+    data = loads(client.recv(1000000).decode('utf-8'))  # принимаем данные
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/json/__init__.py", line 357, in loads
+    return _default_decoder.decode(s)
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Клиенту ('127.0.0.1', 61900) отправлено ответное сообщение: 'b'{"error": "Message not JSON format.", "response": 400}''.
+Соединение с клиентом ('127.0.0.1', 61900) закрыто'.
+Клиентов не обнаружено
+Клиентов не обнаружено
