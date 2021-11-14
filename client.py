@@ -1,11 +1,12 @@
 from socket import socket, AF_INET, SOCK_STREAM
 import argparse
-from time import time
+from time import time, sleep
 from json import dumps, loads
+import threading
+import sys
 
 from log_conf.client_log_config import client_log
 from decos import Log
-
 
 parser = argparse.ArgumentParser(description='JSON instant messaging client.')
 parser.add_argument(
@@ -17,7 +18,7 @@ parser.add_argument(
 parser.add_argument(
     '-port',
     type=int,
-    default=7775,
+    default=7777,
     help='Server port (default: 7777)'
 )
 args = parser.parse_args()
@@ -31,7 +32,15 @@ class CustomClient:
         if timeout_:
             self.client.settimeout(timeout_)
         self.con = False
-        self.type = 1
+        self.name = self.get_name()
+
+    @staticmethod
+    @Log(client_log)
+    def get_name():
+        name = ""
+        while not name:
+            name = input('Введите имя пользователя: ')
+        return name
 
     @Log(client_log)
     def connect(self, address: str, port: int) -> None:
@@ -61,27 +70,13 @@ class CustomClient:
     def __validate_response(data):
         """Валидация ответного сообщения от сервера"""
         try:
-            data = loads(data.decode('utf-8'))
+            data = data.decode('utf-8')
         except Exception as err:
             client_log.error("Принято сообщение не валидного формата.")
             client_log.exception(err)
             return "Message not JSON format."
         else:
-            if isinstance(data, dict):
-                try:
-                    assert len(data) in [1, 2, 3], "Не валидное количество полей"
-                    assert "response" in data, "Отсутствует поле response"
-                    assert isinstance(data["response"], int), "Поле response не числового типа"
-                    assert "alert" in data or "error" in data, "Присутствуют не валидные поля"
-                except AssertionError as err:
-                    client_log.error("Принятое сообщение имеет не валидный формат.")
-                    client_log.exception(err)
-                    return f"Не валидное сообщение от сервера, {str(err)}: {data}"
-                else:
-                    return str(data)
-            else:
-                client_log.error(f"Принятое сообщение имеет не верный формат: {data}")
-                return "Message not JSON format."
+            return str(data)
 
     @Log(client_log)
     def send_message(self, mess: dict) -> str:
@@ -89,45 +84,104 @@ class CustomClient:
         if self.con:
             self.client.send(dumps(mess).encode('utf-8'))
             client_log.info(f"Отправлено сообщение: '{mess}'.")
-            if self.type != 1:  # отправителю ненужно ждать ответного сообщения
-                response_data = self.__receive_msg()
-                response_msg = self.__validate_response(response_data)
-                client_log.info(f"Получено сообщение: '{response_msg}'.")
-                return response_msg
+            response_data = self.__receive_msg()
+            response_msg = self.__validate_response(response_data)
+            client_log.info(f"Получено сообщение: '{response_msg}'.")
+            return response_msg
         else:
             client_log.warning(f"Отправка сообщения невозможна, соединение с сервером небыло установленно.")
             return "Нет активного соединения."
 
-    @Log(client_log)
-    def run(self):
-        msg = {
-            "action": "msg",
+    def create_presence(self):
+        out = {
+            "action": "presence",
+            'time': int(time()),
+            'user': {
+                'account_name': self.name
+            }
+        }
+        client_log.info(f'Сформировано presence сообщение для пользователя {self.name}')
+
+        return out
+
+    def message_from_server(self):
+        while True:
+            mes = self.__receive_msg()
+            print(self.__validate_response(mes))
+
+    @staticmethod
+    def print_help():
+        print('Поддерживаемые команды:')
+        print('message - отправить сообщение. Кому и текст будет запрошены отдельно.')
+        print('help - вывести подсказки по командам')
+        print('exit - выход из программы')
+
+    def create_message(self):
+        to_user = input('Введите получателя сообщения: ')
+        message = input('Введите сообщение для отправки: ')
+        message_dict = {
+            'action': 'message',
+            'from': self.name,
+            'to': to_user,
+            'time': int(time()),
+            'mess_text': message
+        }
+        client_log.info(f'Сформирован словарь сообщения: {message_dict}')
+        try:
+            self.send_message(message_dict)
+            client_log.info(f'Отправлено сообщение для пользователя {to_user}')
+        except Exception as err:
+            client_log.exception(err)
+            sys.exit(1)
+
+    def create_exit_message(self):
+        """Функция создаёт словарь с сообщением о выходе"""
+        return {
+            'action': 'exit',
+            'time': int(time()),
+            'account_name': self.name
         }
 
+    def user_interactive(self,):
+        self.print_help()
+        while True:
+            command = input('Введите команду: ')
+            if command == 'message':
+                self.create_message()
+            elif command == 'help':
+                self.print_help()
+            elif command == 'exit':
+                self.send_message(self.create_exit_message())
+                print('Завершение соединения.')
+                client_log.info('Завершение работы по команде пользователя.')
+                # Задержка неоходима, чтобы успело уйти сообщение о выходе
+                sleep(0.5)
+                break
+            else:
+                print('Команда не распознана, попробойте снова. help - вывести поддерживаемые команды.')
+
+    @Log(client_log)
+    def run(self):
+        self.connect(args.addr, args.port)
         while True:
             try:
-                type_ = int(input("Выберите тип:\n1.Отправитель\n2.Получатель\n"))
+                presence_msg = self.create_presence()
+                self.send_message(presence_msg)
             except Exception as err:
-                print("Выберите 1 или 2.")
+                client_log.exception(err)
             else:
-                self.type = type_
-                self.connect(args.addr, args.port)
-                if type_ == 1:  # для отправителя
-                    msg["type"] = type_  # что бы сервер понимал кому слать сообщения, а кому нет
-                    while True:
-                        text = input("Введите текст для отправки. EXIT - для выхода.\n")
-                        if text == "EXIT":
-                            self.disconnect()
-                            break
-                        msg["message"] = text
-                        msg["time"] = int(time())
-                        self.send_message(msg)
-                else:  # для слушателя
-                    client_log.info("Ждем сообщений")
-                    while True:
-                        response_data = self.__receive_msg()
-                        response_msg = self.__validate_response(response_data)
-                        client_log.info(f"Получено сообщение: '{response_msg}'.")
+                receiver = threading.Thread(target=self.message_from_server)
+                receiver.daemon = True
+                receiver.start()
+                user_interface = threading.Thread(target=self.user_interactive)
+                user_interface.daemon = True
+                user_interface.start()
+                client_log.info('Запущены процессы')
+                while True:
+                    sleep(1)
+                    if receiver.is_alive() and user_interface.is_alive():
+                        continue
+                    break
 
 
 if __name__ == "__main__":

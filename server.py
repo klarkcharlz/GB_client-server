@@ -17,10 +17,24 @@ parser.add_argument(
 parser.add_argument(
     '-port',
     type=int,
-    default=7775,
+    default=7777,
     help='Server IP (default: 7777)'
 )
 args = parser.parse_args()
+
+
+class IncorrectDataRecivedError(Exception):
+    """Исключение  - некорректные данные получены от сокета"""
+
+    def __str__(self):
+        return 'Принято некорректное сообщение от удалённого компьютера.'
+
+
+class NonDictInputError(Exception):
+    """Исключение - аргумент функции не словарь"""
+
+    def __str__(self):
+        return 'Аргумент функции должен быть словарём.'
 
 
 class CustomServer:
@@ -31,96 +45,120 @@ class CustomServer:
         self.server.settimeout(interval)
         self.server.bind((addr, port))
         self.server.listen(max_clients)
-        self.all_clients = []
-        self.wait = 0
-        self.clients_read = []
-        self.clients_write = []
 
     @staticmethod
-    @Log(server_log)
-    def read_requests(read_clients):
-        responses = {}
-        for sock in read_clients:
-            msg = {}
-            try:
-                data = loads(sock.recv(1000000).decode('utf-8'))  # принимаем данные
-            except Exception as err:
-                server_log.error("Принято сообщение неверного формата.")
-                server_log.exception(err)
+    def send_message(sock, message):
+        if not isinstance(message, dict):
+            raise NonDictInputError
+        js_message = dumps(message)
+        encoded_message = js_message.encode('utf-8')
+        sock.send(encoded_message)
+
+    def process_client_message(self, message, messages_list, client, clients, names):
+        server_log.info(f'Разбор сообщения от клиента : {message}')
+        if 'action' in message and message['action'] == 'presence' and \
+                'time' in message and 'user' in message:
+            if message['user']['account_name'] not in names.keys():
+                names[message['user']['account_name']] = client
+                self.send_message(client, {'response': 200})
             else:
-                server_log.info(f'Сообщение: {data}, было отправлено клиентом: {sock}')
-                if isinstance(data, dict):
-                    if data.get("type", None) == 1:
-                        try:
-                            assert "action" in data, "Отсутствует поле action."
-                            assert data["action"] in ["presence", "prоbe", "msg", "quit", "authenticate", "join",
-                                                      "leave"], \
-                                "Поле action содержит не допустимое значение."
-                            assert len(data["action"]) < 16, "Поле action превышает максимальное значение в 16 символов"
-                            assert "time" in data, "Отсутствует поле time."
-                            assert isinstance(data["time"], int), "Поле time не валидного значения"
-                        except AssertionError as err:
-                            server_log.error("Принят не валидный JSON.")
-                            server_log.exception(err)
-                            msg["error"] = str(err)
-                            msg["response"] = 400
-                        else:
-                            msg["alert"] = "OK"
-                            msg["response"] = 200
-                            msg["message"] = data.get("message", "Nos message")
-                            responses[sock] = msg
-        return responses
+                response = {'response': 400, 'error': None}
+                response['error'] = 'Имя пользователя уже занято.'
+                self.send_message(client, response)
+                clients.remove(client)
+                client.close()
+            return
+        elif 'action' in message and message['action'] == 'message' and \
+                'to' in message and 'time' in message \
+                and 'from' in message and 'mess_text' in message:
+            messages_list.append(message)
+            return
+        elif 'action' in message and message['action'] == 'exit' and 'account_name' in message:
+            clients.remove(names[message['account_name']])
+            names[message['account_name']].close()
+            del names[message['account_name']]
+            return
+        else:
+            response = {'response': 400, 'error': None}
+            response['error'] = 'Запрос некорректен.'
+            self.send_message(client, response)
+            return
 
     @staticmethod
-    @Log(server_log)
-    def write_responses(requests, clients_write, all_clients):
-        listeners = []  # список слушателей
-        msgs = []  # список сообщений для отправки
+    def get_message(client):
+        encoded_response = client.recv(1024)
+        if isinstance(encoded_response, bytes):
+            json_response = encoded_response.decode('utf-8')
+            response = loads(json_response)
+            if isinstance(response, dict):
+                return response
+            else:
+                raise IncorrectDataRecivedError
+        else:
+            raise IncorrectDataRecivedError
 
-        for sock in requests:
-            if requests[sock]:
-                listeners.append(sock)
-                msgs.append(requests[sock])
+    @staticmethod
+    def send_message(sock, message):
+        if not isinstance(message, dict):
+            raise NonDictInputError
+        js_message = dumps(message)
+        encoded_message = js_message.encode('utf-8')
+        sock.send(encoded_message)
 
-        for msg in msgs:
-            for listener in clients_write:
-                if listener not in requests.keys():
-                    try:
-                        if listener == '':
-                            raise Exception
-                        response_msg = dumps(msg).encode('utf-8')
-                        listener.send(response_msg)
-                    except Exception as err:
-                        server_log.exception(err)
-                        server_log.info(f"Клиент {sock} отключился")
-                        sock.close()
-                        all_clients.remove(sock)
-                    else:
-                        server_log.info(f"Клиенту {sock} отправлено ответное сообщение: '{response_msg}'.")
+    def process_message(self, message, names, listen_socks):
+        if message['to'] in names and names[message['to']] in listen_socks:
+            self.send_message(names[message['to']], message)
+            server_log.info(f'Отправлено сообщение пользователю {message["to"]} от пользователя {message["from"]}.')
+        elif message['to'] in names and names[message['to']] not in listen_socks:
+            raise ConnectionError
+        else:
+            server_log.error(
+                f'Пользователь {message["to"]} не зарегистрирован на сервере, отправка сообщения невозможна.')
 
     @Log(server_log)
     def run(self) -> None:
         """Запуск сервера"""
         server_log.warning("Запуск сервера")
         while True:
+            clients = []
             try:
                 client, address = self.server.accept()  # ловим подключение
                 server_log.info(f"Установлено соединение с клиентом: {address}.")
             except TimeoutError:
                 server_log.info("Клиентов не обнаружено")
             else:
-                self.all_clients.append(client)
+                clients.append(client)
             finally:
+                recv_data_lst = []
+                send_data_lst = []
+                messages = []
+                names = dict()
                 try:
-                    clients_read, clients_write, errors = select(self.all_clients, self.all_clients, [], self.wait)
+                    if clients:
+                        recv_data_lst, send_data_lst, err_lst = select(clients, clients, [], 0)
                 except Exception as err:
                     server_log.exception(err)
                 else:
-                    print(clients_read)
-                    print(clients_write)
-                    requests = self.read_requests(clients_read)
-                    if requests:
-                        self.write_responses(requests, clients_write, self.all_clients)
+                    # принимаем сообщения и если ошибка, исключаем клиента.
+                    if recv_data_lst:
+                        for client_with_message in recv_data_lst:
+                            try:
+                                self.process_client_message(self.get_message(client_with_message),
+                                                            messages, client_with_message, clients, names)
+                            except Exception:
+                                server_log.info(f'Клиент {client_with_message.getpeername()} '
+                                                f'отключился от сервера.')
+                                self.clients.remove(client_with_message)
+
+                    # Если есть сообщения, обрабатываем каждое.
+                    for i in messages:
+                        try:
+                            self.process_message(i, names, send_data_lst)
+                        except Exception:
+                            server_log.info(f'Связь с клиентом с именем {i["to"]} была потеряна')
+                            clients.remove(names[i["to"]])
+                            del names[i["to"]]
+                    messages.clear()
 
 
 if __name__ == "__main__":
