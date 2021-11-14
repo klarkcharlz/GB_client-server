@@ -1,0 +1,248 @@
+2021-10-17 23:22:11,633  ERROR       client  [Errno 61] Connection refused
+Traceback (most recent call last):
+  File "client.py", line 35, in connect
+    self.client.connect((address, port))  # подключение
+ConnectionRefusedError: [Errno 61] Connection refused
+2021-10-17 23:22:11,633  ERROR       client  Отправка сообщения невозможна, соединение с сервером небыло установленно.
+2021-10-17 23:22:17,680  INFO        client  Установлено соединение с сервером.
+2021-10-17 23:22:17,681  INFO        client  Отправлено сообщение: '{'action': 'presence', 'time': 1634502137, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-10-17 23:22:17,682  INFO        client  Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-10-30 19:05:51,713    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-10-30 19:05:51,714    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1635609951, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-10-30 19:05:51,716    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-10-30 19:05:51,716    INFO        client      Отключение от сервера.
+2021-10-30 19:20:27,962    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-10-30 19:20:27,963    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1635610827, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-10-30 19:20:27,965    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-10-30 19:20:27,965    INFO        client      Отключение от сервера.
+2021-10-30 19:20:30,230    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-10-30 19:20:30,231    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1635610830, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-10-30 19:20:30,231    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-10-30 19:20:30,231    INFO        client      Отключение от сервера.
+2021-10-30 19:23:43,190    ERROR       client      Неудалось установить соединение с вервером localhost:7777
+2021-10-30 19:23:43,190    ERROR       client      [Errno 61] Connection refused
+Traceback (most recent call last):
+  File "client.py", line 35, in connect
+    self.client.connect((address, port))  # подключение
+ConnectionRefusedError: [Errno 61] Connection refused
+2021-10-30 19:23:43,191    WARNING     client      Отправка сообщения невозможна, соединение с сервером небыло установленно.
+2021-10-30 19:23:43,191    INFO        client      Отключение от сервера.
+2021-11-04 23:02:52,439    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:02:52,439    INFO        client      Log connect((<__main__.CustomClient object at 0x7ffbb045fdf0>, 'localhost', 7777), {}) = None
+2021-11-04 23:02:52,439    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636056172, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:02:52,440    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7ffbb045fdf0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:02:52,440    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:02:52,440    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:02:52,440    INFO        client      Log send_message((<__main__.CustomClient object at 0x7ffbb045fdf0>, {'action': 'presence', 'time': 1636056172, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:02:52,440    INFO        client      Отключение от сервера.
+2021-11-04 23:02:52,440    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7ffbb045fdf0>,), {}) = None
+2021-11-04 23:02:54,470    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:02:54,471    INFO        client      Log connect((<__main__.CustomClient object at 0x7f7fe8460df0>, 'localhost', 7777), {}) = None
+2021-11-04 23:02:54,471    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636056174, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:02:54,471    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f7fe8460df0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:02:54,471    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:02:54,471    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:02:54,471    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f7fe8460df0>, {'action': 'presence', 'time': 1636056174, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:02:54,472    INFO        client      Отключение от сервера.
+2021-11-04 23:02:54,472    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7f7fe8460df0>,), {}) = None
+2021-11-04 23:12:16,125    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:12:16,126    INFO        client      Log connect((<__main__.CustomClient object at 0x7fabc83e0580>, 'localhost', 7777), {}) = None
+2021-11-04 23:12:16,126    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636056736, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:12:16,127    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fabc83e0580>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:12:16,127    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:12:16,127    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:12:16,127    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fabc83e0580>, {'action': 'presence', 'time': 1636056736, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:12:16,128    INFO        client      Отключение от сервера.
+2021-11-04 23:12:16,128    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fabc83e0580>,), {}) = None
+2021-11-04 23:13:58,205    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:13:58,206    INFO        client      Log connect((<__main__.CustomClient object at 0x7fda7849a4f0>, 'localhost', 7777), {}) = None
+2021-11-04 23:13:58,206    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636056838, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:13:58,207    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fda7849a4f0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:13:58,207    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:13:58,207    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:13:58,207    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fda7849a4f0>, {'action': 'presence', 'time': 1636056838, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:13:58,207    INFO        client      Отключение от сервера.
+2021-11-04 23:13:58,207    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fda7849a4f0>,), {}) = None
+2021-11-04 23:14:24,180    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:14:24,180    INFO        client      Log connect((<__main__.CustomClient object at 0x7f99f049a4f0>, 'localhost', 7777), {}) = None
+2021-11-04 23:14:24,180    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636056864, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:14:24,181    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f99f049a4f0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:14:24,182    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:14:24,182    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:14:24,182    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f99f049a4f0>, {'action': 'presence', 'time': 1636056864, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:14:24,182    INFO        client      Отключение от сервера.
+2021-11-04 23:14:24,182    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7f99f049a4f0>,), {}) = None
+2021-11-04 23:15:47,261    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:15:47,262    INFO        client      Log connect((<__main__.CustomClient object at 0x7fdff049a4f0>, 'localhost', 7777), {}) = None
+2021-11-04 23:15:47,262    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636056947, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:15:47,263    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fdff049a4f0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:15:47,263    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:15:47,263    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:15:47,263    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fdff049a4f0>, {'action': 'presence', 'time': 1636056947, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:15:47,264    INFO        client      Отключение от сервера.
+2021-11-04 23:15:47,264    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fdff049a4f0>,), {}) = None
+2021-11-04 23:16:30,859    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:16:30,859    INFO        client      Log connect((<__main__.CustomClient object at 0x7ff4c84da4f0>, 'localhost', 7777), {}) = None
+2021-11-04 23:16:30,859    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636056990, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:16:30,860    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7ff4c84da4f0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:16:30,860    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:16:30,861    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:16:30,861    INFO        client      Log send_message((<__main__.CustomClient object at 0x7ff4c84da4f0>, {'action': 'presence', 'time': 1636056990, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:16:30,861    INFO        client      Отключение от сервера.
+2021-11-04 23:16:30,861    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7ff4c84da4f0>,), {}) = None
+2021-11-04 23:17:21,110    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:17:21,111    INFO        client      Log connect((<__main__.CustomClient object at 0x7fe8701424f0>, 'localhost', 7777), {}) = None
+2021-11-04 23:17:21,111    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057041, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:17:21,112    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fe8701424f0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:17:21,112    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:17:21,112    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:17:21,112    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fe8701424f0>, {'action': 'presence', 'time': 1636057041, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:17:21,112    INFO        client      Отключение от сервера.
+2021-11-04 23:17:21,112    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fe8701424f0>,), {}) = None
+2021-11-04 23:17:33,393    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:17:33,394    INFO        client      Log connect((<__main__.CustomClient object at 0x7f9a103fa4f0>, 'localhost', 7777), {}) = None
+2021-11-04 23:17:33,394    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057053, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:17:33,394    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f9a103fa4f0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:17:33,395    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:17:33,395    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:17:33,395    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f9a103fa4f0>, {'action': 'presence', 'time': 1636057053, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:17:33,395    INFO        client      Отключение от сервера.
+2021-11-04 23:17:33,395    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7f9a103fa4f0>,), {}) = None
+2021-11-04 23:17:44,333    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:17:44,333    INFO        client      Log connect((<__main__.CustomClient object at 0x7fc0084da4f0>, 'localhost', 7777), {}) = None
+2021-11-04 23:17:44,334    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057064, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:17:44,334    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fc0084da4f0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:17:44,334    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:17:44,334    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:17:44,334    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fc0084da4f0>, {'action': 'presence', 'time': 1636057064, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:17:44,334    INFO        client      Отключение от сервера.
+2021-11-04 23:17:44,334    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fc0084da4f0>,), {}) = None
+2021-11-04 23:17:57,098    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:17:57,099    INFO        client      Log connect((<__main__.CustomClient object at 0x7fc39045a4f0>, 'localhost', 7777), {}) = None
+2021-11-04 23:17:57,099    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057077, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:17:57,099    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fc39045a4f0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:17:57,100    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:17:57,100    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:17:57,100    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fc39045a4f0>, {'action': 'presence', 'time': 1636057077, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:17:57,100    INFO        client      Отключение от сервера.
+2021-11-04 23:17:57,100    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fc39045a4f0>,), {}) = None
+2021-11-04 23:19:16,965    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:19:16,966    INFO        client      Log connect((<__main__.CustomClient object at 0x7f91e046ce20>, 'localhost', 7777), {}) = None
+2021-11-04 23:19:16,966    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057156, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:19:16,966    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f91e046ce20>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:19:16,967    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:19:16,967    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:19:16,967    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f91e046ce20>, {'action': 'presence', 'time': 1636057156, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:19:16,967    INFO        client      Отключение от сервера.
+2021-11-04 23:19:16,967    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7f91e046ce20>,), {}) = None
+2021-11-04 23:21:06,630    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:21:06,630    INFO        client      Log connect((<__main__.CustomClient object at 0x7feeb0084e20>, 'localhost', 7777), {}) = None
+2021-11-04 23:21:06,630    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057266, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:21:06,631    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7feeb0084e20>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:21:06,631    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:21:06,631    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:21:06,631    INFO        client      Log send_message((<__main__.CustomClient object at 0x7feeb0084e20>, {'action': 'presence', 'time': 1636057266, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:21:06,631    INFO        client      Отключение от сервера.
+2021-11-04 23:21:06,631    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7feeb0084e20>,), {}) = None
+2021-11-04 23:21:16,682    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:21:16,683    INFO        client      Log connect((<__main__.CustomClient object at 0x7f82384cce20>, 'localhost', 7777), {}) = None
+2021-11-04 23:21:16,683    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057276, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:21:16,683    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f82384cce20>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:21:16,684    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:21:16,684    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:21:16,684    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f82384cce20>, {'action': 'presence', 'time': 1636057276, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:21:16,684    INFO        client      Отключение от сервера.
+2021-11-04 23:21:16,684    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7f82384cce20>,), {}) = None
+2021-11-04 23:22:25,131    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:22:25,132    INFO        client      Log connect((<__main__.CustomClient object at 0x7fc61044ddf0>, 'localhost', 7777), {}) = None
+2021-11-04 23:22:25,132    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057345, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:22:25,132    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fc61044ddf0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:22:25,133    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:22:25,133    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:22:25,133    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fc61044ddf0>, {'action': 'presence', 'time': 1636057345, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:22:25,133    INFO        client      Отключение от сервера.
+2021-11-04 23:22:25,133    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fc61044ddf0>,), {}) = None
+2021-11-04 23:24:12,927    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:24:12,927    INFO        client      Log connect((<__main__.CustomClient object at 0x7fa040044e20>, 'localhost', 7777), {}) = None
+2021-11-04 23:24:12,928    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057452, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:24:12,928    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fa040044e20>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:24:12,928    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:24:12,928    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:24:12,928    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fa040044e20>, {'action': 'presence', 'time': 1636057452, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:24:12,928    INFO        client      Отключение от сервера.
+2021-11-04 23:24:12,929    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fa040044e20>,), {}) = None
+2021-11-04 23:24:33,229    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:24:33,229    INFO        client      Log connect((<__main__.CustomClient object at 0x7f92384ccdf0>, 'localhost', 7777), {}) = None
+2021-11-04 23:24:33,229    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057473, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:24:33,230    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f92384ccdf0>,), {}) = b'{"alert": "OK", "response": 200}'
+2021-11-04 23:24:33,230    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:24:33,230    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:24:33,230    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f92384ccdf0>, {'action': 'presence', 'time': 1636057473, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}
+2021-11-04 23:24:33,230    INFO        client      Отключение от сервера.
+2021-11-04 23:24:33,230    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7f92384ccdf0>,), {}) = None
+2021-11-04 23:28:08,076    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:28:08,077    INFO        client      Log connect((<__main__.CustomClient object at 0x7f911848ce20>, 'localhost', 7777), {}) = None.
+2021-11-04 23:28:08,077    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057688, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:28:08,078    INFO        client      Функция __receive_msg была вызвана из функции send_message
+2021-11-04 23:28:08,078    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f911848ce20>,), {}) = b'{"alert": "OK", "response": 200}'.
+2021-11-04 23:28:08,078    INFO        client      Функция __validate_response была вызвана из функции send_message
+2021-11-04 23:28:08,078    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-04 23:28:08,078    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:28:08,078    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f911848ce20>, {'action': 'presence', 'time': 1636057688, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-04 23:28:08,078    INFO        client      Отключение от сервера.
+2021-11-04 23:28:08,078    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7f911848ce20>,), {}) = None.
+2021-11-04 23:28:08,944    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:28:08,944    INFO        client      Log connect((<__main__.CustomClient object at 0x7fbed04b1eb0>, 'localhost', 7777), {}) = None.
+2021-11-04 23:28:08,944    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057688, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:28:08,945    INFO        client      Функция __receive_msg была вызвана из функции send_message
+2021-11-04 23:28:08,945    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fbed04b1eb0>,), {}) = b'{"alert": "OK", "response": 200}'.
+2021-11-04 23:28:08,945    INFO        client      Функция __validate_response была вызвана из функции send_message
+2021-11-04 23:28:08,945    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-04 23:28:08,945    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:28:08,945    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fbed04b1eb0>, {'action': 'presence', 'time': 1636057688, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-04 23:28:08,945    INFO        client      Отключение от сервера.
+2021-11-04 23:28:08,945    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fbed04b1eb0>,), {}) = None.
+2021-11-04 23:28:09,624    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-04 23:28:09,624    INFO        client      Log connect((<__main__.CustomClient object at 0x7fc9604b1eb0>, 'localhost', 7777), {}) = None.
+2021-11-04 23:28:09,624    INFO        client      Отправлено сообщение: '{'action': 'presence', 'time': 1636057689, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}'.
+2021-11-04 23:28:09,624    INFO        client      Функция __receive_msg была вызвана из функции send_message
+2021-11-04 23:28:09,625    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fc9604b1eb0>,), {}) = b'{"alert": "OK", "response": 200}'.
+2021-11-04 23:28:09,625    INFO        client      Функция __validate_response была вызвана из функции send_message
+2021-11-04 23:28:09,625    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-04 23:28:09,625    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-04 23:28:09,625    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fc9604b1eb0>, {'action': 'presence', 'time': 1636057689, 'type': 'status', 'user': {'account_name': 'Klark Charlz', 'status': 'Online'}}), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-04 23:28:09,625    INFO        client      Отключение от сервера.
+2021-11-04 23:28:09,625    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fc9604b1eb0>,), {}) = None.
+2021-11-08 20:38:08,628    INFO        client      Функция connect была вызвана из функции run
+2021-11-08 20:38:08,634    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-08 20:38:08,634    INFO        client      Log connect((<__main__.CustomClient object at 0x7f99c04aff40>, 'localhost', 7777), {}) = None.
+2021-11-08 20:38:11,976    INFO        client      Функция send_message была вызвана из функции run
+2021-11-08 20:38:11,980    INFO        client      Отправлено сообщение: '{'action': 'msg', 'message': 'adsadas', 'time': 1636393091.974446}'.
+2021-11-08 20:38:11,981    INFO        client      Функция __receive_msg была вызвана из функции send_message
+2021-11-08 20:38:11,983    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7f99c04aff40>,), {}) = b'{"error": "\\u041f\\u043e\\u043b\\u0435 time \\u043d\\u0435 \\u0432\\u0430\\u043b\\u0438\\u0434\\u043d\\u043e\\u0433\\u043e \\u0437\\u043d\\u0430\\u0447\\u0435\\u043d\\u0438\\u044f", "response": 400}'.
+2021-11-08 20:38:11,985    INFO        client      Функция __validate_response была вызвана из функции send_message
+2021-11-08 20:38:11,985    INFO        client      Log __validate_response((b'{"error": "\\u041f\\u043e\\u043b\\u0435 time \\u043d\\u0435 \\u0432\\u0430\\u043b\\u0438\\u0434\\u043d\\u043e\\u0433\\u043e \\u0437\\u043d\\u0430\\u0447\\u0435\\u043d\\u0438\\u044f", "response": 400}',), {}) = {'error': 'Поле time не валидного значения', 'response': 400}.
+2021-11-08 20:38:11,986    INFO        client      Получено сообщение: '{'error': 'Поле time не валидного значения', 'response': 400}'.
+2021-11-08 20:38:11,986    INFO        client      Log send_message((<__main__.CustomClient object at 0x7f99c04aff40>, {'action': 'msg', 'message': 'adsadas', 'time': 1636393091.974446}), {}) = {'error': 'Поле time не валидного значения', 'response': 400}.
+2021-11-08 20:39:19,933    INFO        client      Функция connect была вызвана из функции run
+2021-11-08 20:39:19,935    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-08 20:39:19,935    INFO        client      Log connect((<__main__.CustomClient object at 0x7fb3784b0f40>, 'localhost', 7777), {}) = None.
+2021-11-08 20:39:21,257    INFO        client      Функция send_message была вызвана из функции run
+2021-11-08 20:39:21,258    INFO        client      Отправлено сообщение: '{'action': 'msg', 'message': 'sadsad', 'time': 1636393161}'.
+2021-11-08 20:39:21,259    INFO        client      Функция __receive_msg была вызвана из функции send_message
+2021-11-08 20:39:21,260    INFO        client      Log __receive_msg((<__main__.CustomClient object at 0x7fb3784b0f40>,), {}) = b'{"alert": "OK", "response": 200}'.
+2021-11-08 20:39:21,261    INFO        client      Функция __validate_response была вызвана из функции send_message
+2021-11-08 20:39:21,261    INFO        client      Log __validate_response((b'{"alert": "OK", "response": 200}',), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-08 20:39:21,261    INFO        client      Получено сообщение: '{'alert': 'OK', 'response': 200}'.
+2021-11-08 20:39:21,261    INFO        client      Log send_message((<__main__.CustomClient object at 0x7fb3784b0f40>, {'action': 'msg', 'message': 'sadsad', 'time': 1636393161}), {}) = {'alert': 'OK', 'response': 200}.
+2021-11-08 20:39:40,342    INFO        client      Функция disconnect была вызвана из функции run
+2021-11-08 20:39:40,343    INFO        client      Отключение от сервера.
+2021-11-08 20:39:40,344    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fb3784b0f40>,), {}) = None.
+2021-11-08 20:39:40,344    INFO        client      Log run((<__main__.CustomClient object at 0x7fb3784b0f40>,), {}) = None.
+2021-11-08 20:40:21,164    INFO        client      Функция connect была вызвана из функции run
+2021-11-08 20:40:21,167    INFO        client      Установлено соединение с сервером localhost:7777.
+2021-11-08 20:40:21,167    INFO        client      Log connect((<__main__.CustomClient object at 0x7fe96846ff40>, 'localhost', 7777), {}) = None.
+2021-11-08 20:40:24,593    INFO        client      Функция disconnect была вызвана из функции run
+2021-11-08 20:40:24,594    INFO        client      Отключение от сервера.
+2021-11-08 20:40:24,595    INFO        client      Log disconnect((<__main__.CustomClient object at 0x7fe96846ff40>,), {}) = None.
+2021-11-08 20:40:24,595    INFO        client      Log run((<__main__.CustomClient object at 0x7fe96846ff40>,), {}) = None.
